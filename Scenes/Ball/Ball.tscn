@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgdth2bcnuoh2"]
+
+[ext_resource type="Texture2D" uid="uid://b7hjigik8n7x3" path="res://Addons/Kenney1BitPlatformer/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_8y531"]
+[ext_resource type="Script" path="res://Scenes/Ball/Ball.gd" id="1_yx8xg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2mn0f"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cbjml"]
+radius = 7.0
+
+[node name="Ball" type="RigidBody2D" groups=["ball"]]
+physics_material_override = SubResource("PhysicsMaterial_2mn0f")
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_yx8xg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_8y531")
+region_enabled = true
+region_rect = Rect2(144, 288, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cbjml")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
