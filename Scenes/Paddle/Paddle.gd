@@ -1,8 +1,15 @@
 extends CharacterBody2D
 class_name Paddle
 
-
 @export var base_speed : float = 20
+
+var x_position : float = 0
+
+func _ready():
+	x_position = position.x
+
+func _physics_process(delta):
+	position.x = x_position
 
 func move_up(delta):
 	velocity = Vector2.UP * base_speed * delta

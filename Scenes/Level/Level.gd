@@ -18,11 +18,21 @@ var last_spawned_ball : Ball
 
 @onready var balls_parent = $Balls
 @onready var paddles_parent = $Paddles
+@onready var hud := $HUD
+
+var left_score : int = 0
+var right_score : int = 0
+
+func _unhandled_input(event):
+	if event is InputEventKey:
+		event = event as InputEventKey
+		if event.is_action_pressed("open_menu"):
+			hud.open_pause_menu()
 
 
 func _ready():
 	_spawn_paddles(false, false)
-	_spawn_ball()
+	call_deferred("_spawn_ball")
 
 
 func _spawn_ball():
@@ -61,3 +71,24 @@ func _spawn_player_paddle(position, up_input, down_input, is_facing_left : bool)
 	
 	paddles_parent.add_child(player)
 	player.position = position
+
+
+func _check_end_game():
+	hud.update_scores(left_score, right_score)
+	
+	if left_score == 10:
+		pass
+	elif right_score == 10:
+		pass
+	else:
+		call_deferred("_spawn_ball")
+
+
+func _on_left_score_detector_scored():
+	right_score += 1
+	_check_end_game()
+
+
+func _on_right_score_detector_scored():
+	left_score += 1
+	_check_end_game()

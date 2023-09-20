@@ -7,23 +7,33 @@
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cbjml"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qir5"]
+size = Vector2(10, 10)
 
 [node name="Ball" type="RigidBody2D" groups=["ball"]]
+collision_layer = 4
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_2mn0f")
 gravity_scale = 0.0
+can_sleep = false
+continuous_cd = 1
+max_contacts_reported = 2
+contact_monitor = true
 linear_damp_mode = 1
 angular_damp_mode = 1
+angular_damp = 500.0
 script = ExtResource("1_yx8xg")
+speed = 100.0
+speed_increment = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.698039, 1, 0.619608, 1)
 texture_filter = 1
 texture = ExtResource("1_8y531")
 region_enabled = true
 region_rect = Rect2(144, 288, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_cbjml")
+shape = SubResource("RectangleShape2D_8qir5")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

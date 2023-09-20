@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://beb2nhdt65o6m"]
+[gd_scene load_steps=12 format=3 uid="uid://beb2nhdt65o6m"]
 
 [ext_resource type="Script" path="res://Scenes/Level/Level.gd" id="1_dycwq"]
 [ext_resource type="Texture2D" uid="uid://b7hjigik8n7x3" path="res://Addons/Kenney1BitPlatformer/Tilemap/monochrome_tilemap_transparent_packed.png" id="2_bdfb0"]
 [ext_resource type="PackedScene" uid="uid://cgdth2bcnuoh2" path="res://Scenes/Ball/Ball.tscn" id="2_q684d"]
 [ext_resource type="PackedScene" uid="uid://c1ylbld6i77wj" path="res://Scenes/Player/Player.tscn" id="3_ior7y"]
+[ext_resource type="PackedScene" uid="uid://cgg4gdnbpjmxe" path="res://Scenes/ScoreDetector/ScoreDetector.tscn" id="5_xjrqt"]
+[ext_resource type="PackedScene" uid="uid://dthl4wr3vvvls" path="res://Scenes/UI/HUD/HUD.tscn" id="6_nkefu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6hv68"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_agwed"]
 texture = ExtResource("2_bdfb0")
@@ -1251,7 +1257,14 @@ texture = ExtResource("2_bdfb0")
 [sub_resource type="TileSet" id="TileSet_huvym"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_6hv68")
 sources/0 = SubResource("TileSetAtlasSource_agwed")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_564y4"]
+size = Vector2(20, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_px2sj"]
+size = Vector2(20, 300)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_dycwq")
@@ -1261,6 +1274,15 @@ p1_up_input = "p1_up"
 p1_down_input = "p1_down"
 p2_up_input = "p2_up"
 p2_down_input = "p2_down"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -23.0
+offset_top = -9.0
+offset_right = 269.0
+offset_bottom = 166.0
+color = Color(0.0313726, 0.388235, 0.458824, 1)
+
+[node name="HUD" parent="." instance=ExtResource("6_nkefu")]
 
 [node name="LeftSpawn" type="Marker2D" parent="."]
 position = Vector2(20, 80)
@@ -1279,9 +1301,33 @@ position = Vector2(120, 80)
 one_shot = true
 
 [node name="TileMap" type="TileMap" parent="."]
+modulate = Color(0.235294, 0.0862745, 0.258824, 1)
 texture_filter = 1
 tile_set = SubResource("TileSet_huvym")
 format = 2
 layer_0/tile_data = PackedInt32Array(65535, 458752, 6, 0, 524288, 6, 1, 524288, 6, 2, 524288, 6, 3, 524288, 6, 4, 524288, 6, 5, 524288, 6, 6, 524288, 6, 7, 524288, 6, 8, 524288, 6, 9, 524288, 6, 10, 524288, 6, 11, 524288, 6, 12, 524288, 6, 13, 524288, 6, 14, 524288, 6, 15, 589824, 6, 655359, 458752, 4, 589824, 524288, 4, 589825, 524288, 4, 589826, 524288, 4, 589827, 524288, 4, 589828, 524288, 4, 589829, 524288, 4, 589830, 524288, 4, 589831, 524288, 4, 589832, 524288, 4, 589833, 524288, 4, 589834, 524288, 4, 589835, 524288, 4, 589836, 524288, 4, 589837, 524288, 4, 589838, 524288, 4, 589839, 589824, 4)
 
+[node name="ScoreDetectors" type="Node2D" parent="."]
+
+[node name="LeftScoreDetector" parent="ScoreDetectors" instance=ExtResource("5_xjrqt")]
+position = Vector2(-20, 80)
+
+[node name="CollisionShape2D" parent="ScoreDetectors/LeftScoreDetector" index="0"]
+position = Vector2(-13, 0)
+shape = SubResource("RectangleShape2D_564y4")
+
+[node name="RightScoreDetector" parent="ScoreDetectors" instance=ExtResource("5_xjrqt")]
+position = Vector2(278, 80)
+
+[node name="CollisionShape2D" parent="ScoreDetectors/RightScoreDetector" index="0"]
+shape = SubResource("RectangleShape2D_px2sj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(120, 80)
+
 [connection signal="timeout" from="LaunchBallTimer" to="." method="_on_launch_ball_timer_timeout"]
+[connection signal="scored" from="ScoreDetectors/LeftScoreDetector" to="." method="_on_left_score_detector_scored"]
+[connection signal="scored" from="ScoreDetectors/RightScoreDetector" to="." method="_on_right_score_detector_scored"]
+
+[editable path="ScoreDetectors/LeftScoreDetector"]
+[editable path="ScoreDetectors/RightScoreDetector"]
