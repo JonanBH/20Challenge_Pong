@@ -1,8 +1,6 @@
 extends CanvasLayer
 class_name HUD
 
-@export var scene_to_load : PackedScene
-
 @onready var left_score := $LeftScore
 @onready var right_score := $RightScore
 

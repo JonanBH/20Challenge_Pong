@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dthl4wr3vvvls"]
+[gd_scene load_steps=3 format=3 uid="uid://dthl4wr3vvvls"]
 
 [ext_resource type="FontFile" uid="uid://dfsgggbp5ygo0" path="res://Addons/KenneyFonts/Kenney Thick.ttf" id="1_4supa"]
 [ext_resource type="Script" path="res://Scenes/UI/HUD/HUD.gd" id="1_ogh4p"]
-[ext_resource type="PackedScene" uid="uid://beb2nhdt65o6m" path="res://Scenes/Level/Level.tscn" id="2_723np"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_ogh4p")
-scene_to_load = ExtResource("2_723np")
 
 [node name="LeftScore" type="Label" parent="."]
 anchors_preset = 9
