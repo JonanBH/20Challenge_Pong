@@ -1,6 +1,4 @@
 # 20Challenge_Pong
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
 
 ![image](https://github.com/JonanBH/20Challenge_Pong/assets/3010194/3c84665d-a00a-4a4d-9b50-e4c5e4117287)
 
