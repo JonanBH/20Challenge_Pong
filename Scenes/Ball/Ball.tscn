@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgdth2bcnuoh2"]
+[gd_scene load_steps=7 format=3 uid="uid://cgdth2bcnuoh2"]
 
 [ext_resource type="Texture2D" uid="uid://b7hjigik8n7x3" path="res://Addons/Kenney1BitPlatformer/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_8y531"]
 [ext_resource type="Script" path="res://Scenes/Ball/Ball.gd" id="1_yx8xg"]
+[ext_resource type="AudioStream" uid="uid://dvri08fq5vmco" path="res://Addons/KenneyAudio/impactPlank_medium_002.ogg" id="3_wyj1a"]
+[ext_resource type="AudioStream" uid="uid://htbfvxhye5ln" path="res://Addons/KenneyAudio/impactMining_003.ogg" id="4_ag65x"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2mn0f"]
 friction = 0.0
@@ -35,5 +37,11 @@ region_rect = Rect2(144, 288, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8qir5")
+
+[node name="AudioHitPaddle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wyj1a")
+
+[node name="AudioHitWalls" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ag65x")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

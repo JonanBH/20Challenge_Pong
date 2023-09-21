@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dthl4wr3vvvls"]
+[gd_scene load_steps=4 format=3 uid="uid://dthl4wr3vvvls"]
 
 [ext_resource type="FontFile" uid="uid://dfsgggbp5ygo0" path="res://Addons/KenneyFonts/Kenney Thick.ttf" id="1_4supa"]
 [ext_resource type="Script" path="res://Scenes/UI/HUD/HUD.gd" id="1_ogh4p"]
+[ext_resource type="PackedScene" uid="uid://beb2nhdt65o6m" path="res://Scenes/Level/Level.tscn" id="2_723np"]
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_ogh4p")
+scene_to_load = ExtResource("2_723np")
 
 [node name="LeftScore" type="Label" parent="."]
 anchors_preset = 9
@@ -60,4 +62,42 @@ focus_neighbor_bottom = NodePath(".")
 text = "Main Menu
 "
 
+[node name="EndGameMenu" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -33.0
+offset_right = 48.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerVictoryLabel" type="Label" parent="EndGameMenu"]
+layout_mode = 2
+text = "Left Player won!"
+
+[node name="HSeparator" type="HSeparator" parent="EndGameMenu"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Btn_PlayAgain" type="Button" parent="EndGameMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Btn_MainMenu")
+focus_neighbor_bottom = NodePath("../Btn_MainMenu")
+text = "Resume"
+
+[node name="Btn_MainMenu" type="Button" parent="EndGameMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Btn_PlayAgain")
+focus_neighbor_bottom = NodePath(".")
+text = "Main Menu
+"
+
 [connection signal="pressed" from="PauseMenu/Btn_Resume" to="." method="_on_btn_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/Btn_MainMenu" to="." method="_on_btn_main_menu_pressed"]
+[connection signal="pressed" from="EndGameMenu/Btn_PlayAgain" to="." method="_on_btn_play_again_pressed"]
+[connection signal="pressed" from="EndGameMenu/Btn_MainMenu" to="." method="_on_btn_main_menu_pressed"]

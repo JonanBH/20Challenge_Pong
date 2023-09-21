@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://5v7hk2rybbet"]
+
+[ext_resource type="Script" path="res://Scenes/UI/MainMenu/MainMenu.gd" id="1_vtwin"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_vtwin")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0313726, 0.388235, 0.458824, 1)
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -33.0
+offset_right = 48.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Btn_Play" type="Button" parent="MainMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Btn_Quit")
+focus_neighbor_bottom = NodePath("../Btn_Quit")
+text = "Play"
+
+[node name="Btn_Quit" type="Button" parent="MainMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Btn_Play")
+focus_neighbor_bottom = NodePath("../Btn_Play")
+text = "Quit
+"
+
+[node name="PlayerSelection" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -33.0
+offset_right = 44.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPlayer" type="VBoxContainer" parent="PlayerSelection"]
+layout_mode = 2
+
+[node name="Btn_Player" type="Button" parent="PlayerSelection/LeftPlayer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Btn_Start")
+focus_neighbor_right = NodePath("../../Btn_Start")
+focus_neighbor_bottom = NodePath("../Btn_Bot")
+text = "Player"
+
+[node name="Btn_Bot" type="Button" parent="PlayerSelection/LeftPlayer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Btn_Player")
+focus_neighbor_right = NodePath("../../Btn_Start")
+focus_neighbor_bottom = NodePath("../../Btn_Start")
+text = "Bot
+"
+
+[node name="LeftPlayer" type="VBoxContainer" parent="PlayerSelection/LeftPlayer"]
+layout_mode = 2
+
+[node name="Btn_Start" type="Button" parent="PlayerSelection"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../LeftPlayer/Btn_Player")
+focus_neighbor_right = NodePath("../RightPlayer/Btn_Player")
+text = "Start"
+
+[node name="RightPlayer" type="VBoxContainer" parent="PlayerSelection"]
+layout_mode = 2
+
+[node name="Btn_Player" type="Button" parent="PlayerSelection/RightPlayer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../Btn_Start")
+focus_neighbor_top = NodePath("../../Btn_Start")
+focus_neighbor_bottom = NodePath("../Btn_Bot")
+text = "Player"
+
+[node name="Btn_Bot" type="Button" parent="PlayerSelection/RightPlayer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../../Btn_Start")
+focus_neighbor_top = NodePath("../Btn_Player")
+focus_neighbor_bottom = NodePath("../../Btn_Start")
+text = "Bot
+"
+
+[connection signal="pressed" from="MainMenu/Btn_Play" to="." method="_on_btn_play_pressed"]
+[connection signal="pressed" from="MainMenu/Btn_Quit" to="." method="_on_btn_quit_pressed"]
+[connection signal="pressed" from="PlayerSelection/LeftPlayer/Btn_Player" to="." method="_on_btn_left_player_pressed"]
+[connection signal="pressed" from="PlayerSelection/LeftPlayer/Btn_Bot" to="." method="_on_btn_left_bot_pressed"]
+[connection signal="pressed" from="PlayerSelection/Btn_Start" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="PlayerSelection/RightPlayer/Btn_Player" to="." method="_on_btn_right_player_pressed"]
+[connection signal="pressed" from="PlayerSelection/RightPlayer/Btn_Bot" to="." method="_on_btn_right_bot_pressed"]

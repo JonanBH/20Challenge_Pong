@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://beb2nhdt65o6m"]
+[gd_scene load_steps=13 format=3 uid="uid://beb2nhdt65o6m"]
 
 [ext_resource type="Script" path="res://Scenes/Level/Level.gd" id="1_dycwq"]
 [ext_resource type="Texture2D" uid="uid://b7hjigik8n7x3" path="res://Addons/Kenney1BitPlatformer/Tilemap/monochrome_tilemap_transparent_packed.png" id="2_bdfb0"]
 [ext_resource type="PackedScene" uid="uid://cgdth2bcnuoh2" path="res://Scenes/Ball/Ball.tscn" id="2_q684d"]
 [ext_resource type="PackedScene" uid="uid://c1ylbld6i77wj" path="res://Scenes/Player/Player.tscn" id="3_ior7y"]
+[ext_resource type="PackedScene" uid="uid://5pts3pjnkba7" path="res://Scenes/Bot/Bot.tscn" id="4_xuus8"]
 [ext_resource type="PackedScene" uid="uid://cgg4gdnbpjmxe" path="res://Scenes/ScoreDetector/ScoreDetector.tscn" id="5_xjrqt"]
 [ext_resource type="PackedScene" uid="uid://dthl4wr3vvvls" path="res://Scenes/UI/HUD/HUD.tscn" id="6_nkefu"]
 
@@ -1270,6 +1271,7 @@ size = Vector2(20, 300)
 script = ExtResource("1_dycwq")
 ball_scene = ExtResource("2_q684d")
 player_paddle_scene = ExtResource("3_ior7y")
+bot_paddle_scene = ExtResource("4_xuus8")
 p1_up_input = "p1_up"
 p1_down_input = "p1_down"
 p2_up_input = "p2_up"
